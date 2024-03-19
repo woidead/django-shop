@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+    <h2>Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <h3>{{ product.name }}</h3>
+                Description: {{ product.description }}<br>
+                Price: {{ product.price }}<br>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" height="100">
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
