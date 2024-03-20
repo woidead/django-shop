@@ -10,7 +10,7 @@
         {% for product in products %}
             <div>
                 <a href="{% url 'product_detail' product.id product.category.slug %}">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <img width="200px" src="{{ product.image.url }}" alt="{{ product.name }}">
                     <h3>{{ product.name }}</h3>
                 </a>
                 <p>{{ product.category.slug }}</p>
