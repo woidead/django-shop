@@ -42,19 +42,17 @@ def cart_detail(request):
     cart = Cart(request)
     return render(request, 'shop/cart/detail.html', {'cart': cart})
 
-
 def order_create(request):
     cart = Cart(request)
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
+            order = form.save(commit=False)
+            order.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item["product"], price=item["price"], quantity=item["quantity"])
-            cart.save()
+            cart.clear()
             return render(request, "shop/order/created.html", {"order":order})
     else:
         form = OrderCreateForm()
-    return render(request, "shop/order/create.html", {"order":order, "form":form})
-
-                
+    return render(request, "shop/order/create.html", {"cart": cart, "form": form})
