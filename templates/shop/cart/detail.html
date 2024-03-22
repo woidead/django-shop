@@ -26,4 +26,5 @@
             <td colspan="4">{{ cart.get_total_price }}сом</td>
         </tr>
     </table>
+    <a href="{% url 'order_create' %}">Оформить заказ</a>
 {% endblock %}
