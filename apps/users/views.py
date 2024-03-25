@@ -14,7 +14,7 @@ class UserLoginView(LoginView):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('product_list')
 
 @login_required
 def profile_view(request):

@@ -4,6 +4,8 @@ from .models import Product, OrderItem
 from .cart import Cart
 from .forms import CartAddProductForm, OrderCreateForm
 from .models import Category, Product
+from django.contrib.auth.decorators import login_required
+
 
 def product_list(request, category_slug=None):
     category = None
@@ -42,12 +44,15 @@ def cart_detail(request):
     cart = Cart(request)
     return render(request, 'shop/cart/detail.html', {'cart': cart})
 
+
+@login_required
 def order_create(request):
     cart = Cart(request)
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
+            order.buyer = request.user
             order.save()
             for item in cart:
                 OrderItem.objects.create(order=order, product=item["product"], price=item["price"], quantity=item["quantity"])
