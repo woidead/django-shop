@@ -1,4 +1,5 @@
 from django.db import models
+from ..users.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -35,6 +36,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ("-created",)
