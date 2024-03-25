@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from users.models import User
+from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from .models import User
 
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
